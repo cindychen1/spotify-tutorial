@@ -5,9 +5,18 @@ import plotly.express as px
 import pandas as pd
 from dash.dependencies import Input, Output  
 
+# Font
+external_stylesheets = [
+    {
+        "href": (
+            "file:///Users/cindy/Documents/GitHub/spotify-tutorial/assets/style.css"
+        ),
+        "rel": "stylesheet",
+    },
+]
 
 # Creating the app
-app = Dash(__name__)
+app = Dash(__name__,external_stylesheets=external_stylesheets)
 
 # Read file 
 df = pd.read_csv('Spotify Data.csv')
@@ -21,8 +30,8 @@ song_features = ['acousticness','speechiness','danceability','energy',
 app.layout = html.Div([
     html.H1(children="Spotify Data"),
     html.P(children=(["Observe trends in Spotify songs over time",
-                     " and the distribution of traits in popular songs.",html.Br(),
-                     'Data: Kaggle, "Top Hits Spotify from 2000-2019"']),),
+                     " and the distribution of traits in popular songs.",
+                     ' Data: Kaggle, "Top Hits Spotify from 2000-2019"']),),
     dcc.Dropdown(id ='dropdown',
         options = [
             {"label": song_feature, "value": song_feature}
